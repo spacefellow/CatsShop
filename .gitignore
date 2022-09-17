@@ -1,0 +1,6 @@
+__pycache__/
+.idea
+.flaskenv
+.dbenv
+img
+pg_db

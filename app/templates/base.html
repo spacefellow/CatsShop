@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+		<title>SberCats</title>
+
+		<!-- Google font -->
+		<link href="https://fonts.googleapis.com/css?family=Nunito+Sans:700%7CNunito:300,600" rel="stylesheet">
+
+		<!-- Bootstrap -->
+		<link type="text/css" rel="stylesheet" href="../static/css/bootstrap.min.css"/>
+
+		<!-- Font Awesome Icon -->
+		<link rel="stylesheet" href="../static/css/font-awesome.min.css">
+
+		<!-- Custom stlylesheet -->
+		<link type="text/css" rel="stylesheet" href="../static/css/style.css"/>
+
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+    </head>
+	<body>
+
+		<!-- Header -->
+		<header id="header">
+			<!-- Nav -->
+			<div id="nav">
+				<!-- Main Nav -->
+				<div id="nav-fixed">
+					<div class="container">
+						<!-- logo -->
+						<div class="nav-logo">
+							<a href="/" class="logo"><img src="../static/img/logo.png" alt=""></a>
+						</div>
+						<!-- /logo -->
+
+						<!-- search & aside toggle -->
+						<div class="nav-btns">
+							<button class="search-btn"><i class="fa fa-search"></i></button>
+							<div class="search-form ">
+                                <form action="{{ url_for('router', page = 1)}}" method="GET" class="search-form">
+                                    <input type="text" class="search-input" name="text" placeholder="Введите фразу для поиска">
+                                </form>
+                                 <button class="search-close"><i class="fa fa-times"></i></button>
+                            </div>
+						</div>
+						<!-- /search & aside toggle -->
+					</div>
+				</div>
+				<!-- /Main Nav -->
+			</div>
+			<!-- /Nav -->
+
+		</header>
+		<!-- /Header -->
+
+		<!-- section -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+
+				<div class="row">
+					<div class="col-md-8">
+						<div class="row">
+							{% block content %}{% endblock %}
+                            <nav class="pagination-outer" aria-label="Page navigation">
+                                <ul class="pagination">
+
+                                {% if cats.has_prev %}
+                                    <li class="page-item">
+                                        <a href="{{ url_for('router', **request.args) }}" class="page-link" aria-label="Previous">
+                                            <span aria-hidden="true">«</span>
+                                        </a>
+                                    </li>
+                                {% endif %}
+
+                                {% for page_num in cats.iter_pages()%}
+
+                                    {% if cats.page == page_num %}
+                                        {% if cats.has_prev %}
+                                            {% if cats.prev_num != 1 %}
+                                                <li class="page-item"><a class="page-link" href="{{ url_for('router', page=cats.prev_num, **request.args) }}">{{ cats.prev_num }}</a></li>
+                                            {% elif cats.prev_num == 1 %}
+                                                <li class="page-item"><a class="page-link" href="{{ url_for('router', **request.args) }}">{{ cats.prev_num }}</a></li>
+                                            {% endif %}
+                                        {% endif %}
+                                        <li class="page-item active"><a class="page-link">{{ page_num }}</a></li>
+                                        {% if cats.has_next %}
+                                            <li class="page-item"> <a class="page-link" href="{{ url_for('router', page=cats.next_num, **request.args) }}">{{ cats.next_num }}</a></li>
+                                        {% endif %}
+                                    {% endif %}
+
+                                {% endfor %}
+
+                                {% if cats.has_next %}
+                                    <li class="page-item">
+                                        <a href="{{ url_for('router', page=cats.pages, **request.args) }}" class="page-link" aria-label="Next">
+                                            <span aria-hidden="true">»</span>
+                                        </a>
+                                    </li>
+                                {% elif cats.pages == 0 %}
+                                    <li class="page-item">
+                                        <a href="{{ url_for('all_posts') }}" class="page-link" aria-label="Next">
+                                            <span aria-hidden="true">Перейти на главную страницу</span>
+                                        </a>
+                                    </li>
+                                {% endif %}
+
+                                </ul>
+                            </nav>
+						</div>
+					</div>
+                    <div class="col-md-4">
+                        <div class="aside-widget">
+                            <div class="section-title">
+                                <h3>Сортировка:</h3>
+                            </div>
+                            <div class="category-widget">
+                                <ul>
+							        <li><a href="{{ url_for('all_posts', page=1) }}" class="cat-2">По умолчанию</a></li>
+							        <li><a href="{{ url_for('all_posts', page=1, sort_by_breed = True) }}" class="cat-2">По породе</a></li>
+							        <li><a href="{{ url_for('all_posts', page=1, sort_by_age = True, desc = True) }}" class="cat-2">По возрасту (убыв.)</a></li>
+							        <li><a href="{{ url_for('all_posts', page=1, sort_by_age = True, asc = True) }}" class="cat-2">По возрасту (возр.)</a></li>
+						        </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		<!-- jQuery Plugins -->
+		<script src="../static/js/jquery.min.js"></script>
+		<script src="../static/js/bootstrap.min.js"></script>
+		<script src="../static/js/main.js"></script>
+
+	</body>
+</html>

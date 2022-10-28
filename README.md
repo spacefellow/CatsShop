@@ -37,7 +37,7 @@ At this point, the app runs at http://localhost:8000/
 >Download the code
 ```
 $ git clone https://github.com/spacefellow/CatsShop.git
-Create .flaskenv files in root folder
+Create .flaskenv file in root folder
 $ cd CatsShop
 ```
 

@@ -1,7 +1,7 @@
 ## CatsShop
 A simple web application that displays cats, sorts them by age and name. It stores and serves data using a Flask web application.
 
-###Start the app in Docker
+### Start the app in Docker
 
 >Download the code
 ```
@@ -32,7 +32,7 @@ POSTGRES_DB=name of database
 At this point, the app runs at http://localhost:8000/
 
 
-###Set Up the app in Windows
+### Set Up the app in Windows
 
 >Download the code
 ```
@@ -59,5 +59,5 @@ $ flask run
 ```
 At this point, the app runs at http://127.0.0.1:5000/
 
-###Learn More
+### Learn More
 To learn Flask, check out the [Flask documentation](https://flask.palletsprojects.com/en/2.2.x/).

@@ -27,7 +27,7 @@ POSTGRES_DB=name of database
 
 >Start the APP in Docker
 ```
-\$ docker-compose up --build 
+$ docker-compose up --build 
 ```
 At this point, the app runs at http://localhost:8000/
 

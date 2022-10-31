@@ -55,6 +55,9 @@ $ set FLASK_ENV=development
 
 >Start the app
 ```
+$ flask db init
+$ flask db migrate -m "Some info"
+$ flask db upgrade
 $ flask run
 ```
 At this point, the app runs at http://127.0.0.1:5000/
